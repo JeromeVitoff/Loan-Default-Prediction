@@ -1,0 +1,24 @@
+\babel@toc {french}{}\relax 
+\addvspace {10\p@ }
+\contentsline {xchapter}{Nettoyage, Exploration et Analyse descriptive des données}{2}{chapter.1}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Statistique descriptive train.\relax }}{3}{figure.caption.5}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Matrice de corrélation.\relax }}{4}{figure.caption.6}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Statistique descriptive test.\relax }}{5}{figure.caption.7}%
+\addvspace {10\p@ }
+\contentsline {xchapter}{Entrainement des modèles et interprétation des résultats }{6}{chapter.2}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces arbre de décision.\relax }}{8}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Résumé Statistique descriptive train.\relax }}{20}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Résumé Statistique descriptive jeu test.\relax }}{21}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Matrice de confusion Arbre de décision.\relax }}{22}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Courbe de ROC Arbre de décision.\relax }}{22}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Matrice de confusion Régression logistique.\relax }}{23}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Courbe de ROC Régression Logistique.\relax }}{23}{figure.caption.23}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Matrice de confusion Forêt Aléatoire.\relax }}{24}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Courbe de ROC Forêt Aléatoire\relax }}{24}{figure.caption.25}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Matrice de confusion SVM.\relax }}{25}{figure.caption.26}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Courbe de ROC SVM.\relax }}{25}{figure.caption.27}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Matrice de confusion KNN.\relax }}{26}{figure.caption.28}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Courbe de ROC KNN.\relax }}{26}{figure.caption.29}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Métrique Validation Forêt Aléatoire.\relax }}{27}{figure.caption.30}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Matrice de validation croisée Forêt Aléatoire.\relax }}{27}{figure.caption.31}%
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Matrice de validation croisée Régression Logistique.\relax }}{28}{figure.caption.32}%

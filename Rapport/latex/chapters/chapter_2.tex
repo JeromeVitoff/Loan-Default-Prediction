@@ -1,0 +1,475 @@
+% !TEX root = manuscript.tex
+
+\chapter{Entrainement des modèles et interprétation des résultats }
+\epigraph{ Nous avons diviser les données(train), en données d'entraînement et de validation.}{Darth Vador}
+\minitoc
+\newpage
+\section{entrainement des modèles}
+\subsection{Arbre de décision}
+
+\begin{enumerate}
+\item Accuracy (Précision globale)
+Accuracy = 0.7627
+Cela signifie que 76,27\% des prédictions du modèle sont correctes. C'est la proportion des prédictions correctes (que la prédiction soit pour la classe 0 ou 1) parmi l'ensemble des prédictions réalisées. Cependant, l'accuracy peut être trompeuse si les classes sont déséquilibrées. Ce qui est le cas ici.
+
+\item Métriques pour chaque classe
+
+Classe 0 (la classe majoritaire dans ce cas)
+Precision = 0.78 :
+Sur toutes les prédictions faites comme étant de la classe 0, 78\% étaient correctes. Autrement dit, si le modèle prédit que l'observation appartient à la classe 0, il a 80\% de chances de faire une prédiction correcte.
+
+Recall = 0.92 :
+Parmi toutes les vraies instances de la classe 0, 92\% ont été correctement identifiées par le modèle. Cela indique que le modèle est assez bon pour identifier la classe 0, mais il y a encore 8\% des exemples de la classe 0 qui sont manqués.
+
+F1-score = 0.85 :
+L'F1-score est une moyenne harmonique entre la precision et le recall. C'est une métrique utile quand on veut un compromis entre les deux, particulièrement dans des contextes où l'on veut éviter à la fois de fausses alertes (fausses positives) et des faux négatifs. Ici, le modèle montre un bon équilibre pour la classe 0.
+
+Classe 1 (la classe minoritaire)
+Precision = 0.67 :
+
+Sur toutes les prédictions faites comme étant de la classe 1, 67 \% étaient correctes. Le modèle semble avoir plus de mal à prédire correctement la classe 1 que la classe 0.
+
+Recall = 0.39 :
+Parmi toutes les vraies instances de la classe 1, 39\% ont été correctement identifiées. Cela suggère que le modèle a des difficultés à reconnaître la classe 1, et il manque 61 \% des exemples de cette classe.
+
+F1-score = 0.49 :
+L'F1-score pour la classe 1 est relativement faible, ce qui reflète une combinaison de précision et de rappel qui n'est pas idéale. Cela montre que le modèle a un équilibre défavorable pour cette classe.
+
+\item Métriques moyennes (macro et weighted avg):
+
+Macro avg :
+
+Precision = 0.72, Recall = 0.65, F1-score = 0.67 :
+Ces valeurs sont les moyennes des métriques pour les deux classes, calculées sans tenir compte du déséquilibre des classes. La macro moyenne donne une idée générale de la performance du modèle sur toutes les classes, indépendamment de leur fréquence dans les données.
+
+
+Weighted avg :
+Precision = 0.75, Recall = 0.76, F1-score = 0.74 :
+La weighted moyenne prend en compte la fréquence des classes dans le dataset (plus de 5000 instances de la classe 0 contre environ 2100 pour la classe 1). Ces valeurs montrent qu'en pondérant par la taille des classes, le modèle est un peu plus performant sur la classe 0, mais reste assez équilibré.
+
+En conclusion:
+
+Le modèle est globalement performant, mais il a un déséquilibre de performance entre les deux classes. 
+
+Il fait un très bon travail pour prédire la classe 0, avec une précision élevée (78\%) et un rappel élevé (92\%).
+
+Cependant, il a plus de mal avec la classe 1, avec un rappel faible (39\%) et un F1-score assez bas (49\%), ce qui suggère que le modèle manque beaucoup de cas positifs pour cette classe.
+
+Cela pourrait être dû à un déséquilibre de classes (plus d'exemples de la classe 0 que de la classe 1)
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/arbre.png}
+\caption{arbre de décision.}
+\label{fig:arbre_deci}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\caption{Résultats de performance sur les données de validation-Arbre de décision}
+\label{tab:performance_Arbre}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classe}     & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
+0                   & 0.78               & 0.92            & 0.85              & 1059             \\ \hline
+1                   & 0.67               & 0.39            & 0.49              & 441              \\ \hline
+\textbf{Accuracy}   & \multicolumn{2}{|c|}{} & 0.76 &  1500                              \\ \hline
+\textbf{Macro Avg}  & 0.72               & 0.65            & 0.67              & 1500             \\ \hline
+\textbf{Weighted Avg} & 0.75               & 0.76            & 0.74              & 1500             \\ \hline
+\end{tabular}
+\begin{flushleft}
+Accuracy sur les données de validation: 0.7626666666666667
+\end{flushleft}
+\end{table}
+
+\begin{flushleft}
+La matrice de confusion et la courbe de ROC (voir Annexe~\ref{sec:annexe5}) indiquent que le modèle a une bonne capacité à distinguer entre les classes, mais il n'est pas parfait
+\end{flushleft}
+
+\subsection{Régression logistique}
+
+\begin{enumerate}
+\item Accuracy : 76.6\%
+L'accuracy mesure la proportion globale des prédictions correctes. Ici, le modèle prédit correctement 76,6 \% des cas. Bien que ce soit un bon résultat, ce chiffre seul ne suffit pas à évaluer la performance du modèle, surtout si les classes sont déséquilibrées. Ce qui est le cas ici.
+
+\item Precision, Recall et F1-Score pour la classe 0 (Non-défaillant) :
+Precision = 0.76 : Cela signifie que parmi toutes les prédictions faites par le modèle comme étant "0" (non défaut), 76\% étaient correctes.
+
+Recall = 0.98 : Cela signifie que parmi tous les vrais cas "0", le modèle a réussi à en prédire 98\%. Cela indique que le modèle est très bon pour détecter les non-défaillants.
+
+F1-Score = 0.86 : Le F1-score est une moyenne harmonique entre la précision et le rappel, donc ici, il est relativement élevé, ce qui signifie que le modèle a une bonne capacité à détecter les cas de "0" tout en minimisant les faux positifs.
+
+\item Precision, Recall et F1-Score pour la classe 1 (Défaillant) :
+Precision = 0.85 : Cela signifie que parmi toutes les prédictions faites par le modèle comme étant "1" (défaut), 85\% étaient correctes.
+
+Recall = 0.25 : Ici, seulement 25\% des vrais cas "1" ont été détectés. C'est un faible score, ce qui signifie que le modèle a du mal à identifier les clients en défaut.
+
+F1-Score = 0.38 : Ce score est également faible, ce qui reflète une mauvaise performance du modèle pour prédire les défauts
+
+\item Macro et Weighted Averages :
+Macro avg : Cela donne une moyenne simple des scores de chaque classe (sans tenir compte de la proportion des classes), ce qui donne un score de 0.80 pour la précision, 0.62 pour le rappel et 0.63 pour le F1-score.
+
+Weighted avg : Cette moyenne prend en compte la distribution des classes. Ici, la précision et le rappel sont équilibrés à 0.79 et 0.77 respectivement, avec un F1-score global de 0.72.
+
+En conclusion:
+Le modèle est globalement performant, mais faible déséquilibre de performance entre les deux classes.
+\end{enumerate}
+
+\begin{table}[h]
+\centering
+\caption{Résultats de performance sur les données de validation-Régression Logistique}
+\label{tab:performance_validation_RegL}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classe}       & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
+0                     & 0.76               & 0.98            & 0.86              & 1059             \\ \hline
+1                     & 0.85               & 0.25            & 0.38              & 441              \\ \hline
+\textbf{Accuracy} & \multicolumn{2}{|c|}{} & 0.77       & 1500     \\ \hline
+\textbf{Macro Avg}    & 0.80               & 0.61            & 0.62              & 1500             \\ \hline
+\textbf{Weighted Avg} & 0.79               & 0.77            & 0.72              & 1500             \\ \hline
+\end{tabular}
+\begin{flushleft}
+Accuracy sur les données de validation: 0.766
+\end{flushleft}
+\end{table}
+
+\begin{flushleft}
+La matrice de confusion et la courbe de ROC associées (voir Annexe~\ref{sec:annexe6}) indiquent que le modèle a performance acceptable à distinguer entre les deux classes. 
+\end{flushleft}
+
+\subsection{Forêt aléatoire}
+\begin{enumerate}
+
+\item Accuracy (Précision globale) :
+L'accuracy est de 76.33\%, ce qui signifie que 76.33\% des prédictions du modèle sont correctes sur l'ensemble de validation. Cependant, cette métrique seule peut être trompeuse si les classes sont déséquilibrées.
+
+\item Métriques pour chaque classe :
+
+Classe 0 (support : 1059 instances) :
+Précision (Precision) : 0.76
+Cela signifie que, parmi les prédictions de la classe 0, 76\% étaient correctes.
+
+Rappel (Recall) : 0.96
+Cela signifie que le modèle a identifié 96\% des instances appartenant réellement à la classe 0.
+
+F1-score : 0.85
+Le modèle a bien équilibré précision et rappel pour la classe 0, montrant une bonne performance.
+
+Classe 1 (support : 441 instances)  :
+
+Précision (Precision) : 0.76
+Cela signifie que, parmi les prédictions de la classe 1, 76\% étaient correctes.
+
+Rappel (Recall) : 0.29
+Cela signifie que le modèle n'a identifié que 29\% des instances appartenant réellement à la classe 1.
+Problème notable : Le modèle a de grandes difficultés à détecter la classe 1.
+
+F1-score : 0.42
+Un faible F1-score montre que le modèle est déséquilibré dans sa capacité à prédire correctement la classe 1.
+
+\item Macro Avg (Moyenne non pondérée) :
+
+Précision, Rappel, F1-score :
+Ces moyennes prennent en compte les métriques de chaque classe avec un poids égal.
+
+Précision moyenne : 0.76
+Rappel moyen : 0.62
+F1-score moyen : 0.63
+Cela montre que, en moyenne, les performances du modèle sont limitées par sa faible capacité à gérer la classe 1.
+
+
+\item Weighted Avg (Moyenne pondérée par le support):
+Ces moyennes tiennent compte de l'importance relative des classes (plus de poids pour la classe 0, qui a plus d'exemples).
+
+Précision pondérée : 0.76
+Rappel pondéré : 0.76
+F1-score pondéré : 0.72
+Ces scores montrent que les performances globales semblent correctes, mais elles sont biaisées par la bonne performance sur la classe majoritaire (classe 0).
+
+En résumé:
+
+Le modèle Random Forest montre une bonne capacité à identifier la classe majoritaire (classe 0), mais il a des difficultés à prédire la classe minoritaire (classe 1).
+\end{enumerate}
+
+\begin{table}[h]
+\centering
+\caption{Résultats de performance sur les données de validation Forêt aléatoire}
+\label{tab:performance_validation_FoAl}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classe}       & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
+0                     & 0.76               & 0.96            & 0.85              & 1059             \\ \hline
+1                     & 0.76               & 0.29            & 0.42              & 441              \\ \hline
+\textbf{Accuracy} & \multicolumn{2}{|c|}{} & 0.76            & 1500     \\ \hline
+\textbf{Macro Avg}    & 0.76               & 0.62            & 0.63              & 1500             \\ \hline
+\textbf{Weighted Avg} & 0.76               & 0.76            & 0.72              & 1500             \\ \hline
+\end{tabular}
+\begin{flushleft}
+Accuracy sur les données de validation: 0.763
+\end{flushleft}
+\end{table}
+
+
+
+
+\begin{flushleft}
+La matrice de confusion et la courbe de ROC associées (voir Annexe~\ref{sec:annexe7}) indiquent que (l'AUC = 0.76) le modèle a performance acceptable à distinguer entre les deux classes
+\end{flushleft}
+ 
+\subsection{Support Vector Machines (SVM)}
+\begin{enumerate}
+\item Accuracy (Précision globale): 0.452
+L'accuracy est de 45,2\%, ce qui signifie que le modèle fait des prédictions correctes environ 45\% du temps.
+
+\item Métriques pour chaque classe
+
+Pour la classe 0 :
+
+La précision de la classe 0 est assez bonne, ce qui signifie que, parmi toutes les prédictions où le modèle a dit classe 0, 71\% étaient correctes.
+
+Le rappel pour la classe 0 est assez faible, ce qui signifie que parmi toutes les instances réelles de la classe 0, le modèle n'a réussi à en identifier que 38\%.
+
+Le F1-score(0.50) pour la classe 0 est relativement moyen, ce qui reflète un compromis entre la précision et le rappel.
+
+Pour la classe 1 :
+
+Précision de  0.29 (29\%) : La précision de la classe 1 est faible, ce qui signifie qu'une grande proportion des prédictions de la classe 1 étaient incorrectes.
+
+
+Recall de  0.62 (62\%):Le rappel pour la classe 1 est meilleur, ce qui signifie que le modèle a identifié 62\% des instances réelles de cette classe.
+
+F1-score de 0.40 : Le F1-score pour la classe 1 est plus faible, ce qui indique que le modèle lutte davantage pour classer correctement les instances de cette classe.
+
+Déséquilibre des classes :
+
+Le déséquilibre des classes explique en grande partie cette performance biaisée. Le modèle est plus performant pour prédire la classe majoritaire (classe 0), ce qui conduit à des performances médiocres pour la classe minoritaire (classe 1). Cela se traduit par un recall faible pour la classe 1 et un biais vers la prédiction de la classe 0.
+
+En résumé:
+
+Le modèle SVM ne semble pas très performant, particulièrement pour la classe minoritaire (1). Il fait mieux sur la classe majoritaire (0) mais il est relativement mauvais pour détecter les instances de la classe 1.
+\end{enumerate}
+
+\begin{table}[h]
+\centering
+\caption{Résultats de performance sur les données de validation - SVM}
+\label{tab:performance_validation_SVM}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classe}       & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
+0                     & 0.71               & 0.38            & 0.50              & 1059             \\ \hline
+1                     & 0.29               & 0.62            & 0.40              & 441              \\ \hline
+\textbf{Accuracy} & \multicolumn{2}{|c|}{} & 0.45       & 1500     \\ \hline
+\textbf{Macro Avg}    & 0.50               & 0.50            & 0.45              & 1500             \\ \hline
+\textbf{Weighted Avg} & 0.59               & 0.45            & 0.47              & 1500             \\ \hline
+\end{tabular}
+\begin{flushleft}
+Accuracy sur les données de validation: 0.452
+\end{flushleft}
+\end{table}
+
+
+\begin{flushleft}
+La matrice de confusion et la courbe de ROC associées (voir Annexe~\ref{sec:annexe8}) indiquent que (l'AUC=0.51) le modèle ne parvient pas à mieux prédire que de simples prédictions aléatoires
+\end{flushleft}
+ 
+\subsection{K Nearest Neighbors (KNN) :}
+
+\begin{enumerate}
+
+\item Accuracy (Précision globale): 0.699 (~7\%)
+
+L'accuracy est de 0.699 (~70\%), indique que le modèle prédit correctement 70\% des échantillons de validation. Cependant, l'accuracy seule peut être trompeuse, en particulier si les classes sont déséquilibrées (ce qui semble être le cas ici)
+
+\item Métrique pour les classes
+
+Pour la classe 0 :
+
+Précision (Precision) : 0.70. Cela signifie que, parmi toutes les prédictions faites comme étant de la classe 0, 70\% étaient correctes.
+
+Rappel (Recall) : 0.99. Cela signifie que 99\% des instances de la classe 0 ont été correctement identifiées par le modèle. Le modèle est donc très performant pour la classe 0.
+
+F1-Score : 0.82. Une bonne combinaison de la précision et du rappel pour la classe 0. Le modèle fait bien pour la classe majoritaire.
+
+Pour la classe 1 :
+
+Précision (Precision) : 0.14. Parmi les prédictions faites comme étant de la classe 1,seulement 14\% étaient correctes.
+
+Rappel (Recall) : 0.00. Le modèle n'a pratiquement pas réussi à identifier les instances réelles de la classe 1 (seules quelques-unes, voire aucune, ont été correctement classées)
+
+F1-Score : 0.01. La combinaison de la précision et du rappel est faible, ce qui indique que la classe 1 est mal prédite.
+
+\item Moyennes(sans pondération des effectifs) Macro avg :
+
+La macro-moyenne montre des résultats faibles (~0.42 pour F1-score), en raison des mauvaises performances sur la classe 1.
+
+\item Weightedtenant compte de la proportion des instances dans chaque classe() avg :
+
+Avec une pondération pour la classe majoritaire (classe 0), les scores sont légèrement meilleurs (~0.58 pour F1-score), mais toujours médiocres.
+
+Déséquilibre des classes :
+
+Le déséquilibre des classes explique en grande partie cette performance biaisée. Le modèle est plus performant pour prédire la classe majoritaire (classe 0), ce qui conduit à des performances médiocres pour la classe minoritaire (classe 1). Cela se traduit par un recall faible pour la classe 1 et un biais vers la prédiction de la classe 0.
+
+En résumé:
+
+En résumé, le modèle KNN avec K=20 montre de bonnes performances pour la classe 0 (majoritaire), mais échoue à prédire la classe 1 (minoritaire).
+\end{enumerate}
+
+\begin{table}[h]
+\centering
+\caption{Résultats de performance pour KNN avec K=20 sur les données de validation}
+\label{tab:knn_k20_validation}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classe}       & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
+0                     & 0.70               & 0.99            & 0.82              & 1059             \\ \hline
+1                     & 0.14               & 0.00            & 0.01              & 441              \\ \hline
+\textbf{Accuracy} & \multicolumn{2}{|c|}{} & 0.70    & 1500     \\ \hline
+\textbf{Macro Avg}    & 0.42               & 0.50            & 0.42              & 1500             \\ \hline
+\textbf{Weighted Avg} & 0.54               & 0.70            & 0.58              & 1500             \\ \hline
+\end{tabular}
+\begin{flushleft}
+Meilleur nombre de voisins (\textbf{K}): 20 \\
+Accuracy sur les données de validation: 0.699
+\end{flushleft}
+\end{table}
+
+
+\begin{flushleft}
+La matrice de confusion et la courbe de ROC associées (voir Annexe~\ref{sec:annexe9}) indiquent : Bien que le modèle ait un AUC relativement supérieur à 0.5, cela suggère qu'il n'est pas très bon pour séparer les classes, en particulier dans un cas de classe déséquilibrée. 
+le modèle ne parvient pas à mieux prédire que de simples prédictions aléatoires
+\end{flushleft}
+
+\section{Comparaison et Validation croisé}
+\subsection{Comparaison et Validation croisé avec Accuracy}
+\begin{flushleft}
+Scores de validation croisée :
+Les résultats de la validation croisée montrent la moyenne d'accuracy pour chaque modèle sur les 5 plis. Ces scores aident à évaluer la stabilité et la performance générale des modèles, tout en réduisant les risques de sur-apprentissage (overfitting).
+\end{flushleft} 
+\begin{enumerate}
+\item Précision globale
+\begin{itemize}
+\item Arbre de décision (Accuracy moyenne = 0.6908) : L'arbre de décision a une performance correcte.
+Performance moyenne, avec une forte variation entre les folds (de 0.6791 à 0.6991). Cela indique que l’arbre de décision est sensible aux variations dans les données d’entraînement, probablement dû à un surapprentissage (overfitting) dans certains cas.
+\item Régression logistique (Accuracy moyenne = 0.6872) : La régression logistique montre une performance stable, mais légèrement inférieure à celle des forêts aléatoires.  C'est un modèle linéaire, donc il pourrait être limité si les relations entre les variables ne sont pas linéaires.
+\item Forêts aléatoires (Accuracy moyenne = 0.7793) :
+C'est clairement le modèle le plus performant en validation croisée. Il combine plusieurs arbres de décision pour améliorer la généralisation et réduire le surapprentissage. La faible variance entre les plis confirme qu'il s'adapte bien aux données.
+\item SVM (Accuracy moyenne = 0.5130) : Le SVM affiche des performances très faibles.
+Cela pourrait être dû à des hyperparamètres non optimaux ou à un déséquilibre dans les classes.
+\item KNN (Accuracy moyenne = 0.6768) : KNN a des performances modestes, probablement à cause de la nature des données ou d'un choix sous-optimal du nombre de voisins. Cela peut indiquer que KNN n'est pas adapté à vos données ou qu'il est sensible aux déséquilibres ou à des caractéristiques spécifiques.
+\end{itemize}
+
+\item Comparaison des scores en validation croisée :
+\begin{itemize}
+\item Forêts aléatoires se démarque avec la meilleure moyenne (0.7793), suivie par l'arbre de décision et la régression logistique.
+\item SVM et KNN montrent des scores faibles, ce qui les rend moins fiables pour ce problème.
+
+Cela indique que les modèles non linéaires comme les forêts aléatoires ou les arbres de décision peuvent mieux capturer les patterns complexes des données.
+\end{itemize}
+
+\item \textbf{Évaluation sur le test set pour le meilleur modèle} :
+\begin{itemize}
+\item \textbf{Le modèle Forêts aléatoires, choisi comme meilleur modèle}, montre une accuracy de 0.7613 sur le jeu de test. Cependant, une analyse plus fine des métriques (précision, rappel, F1-score) révèle des points importants :
+\item Classe 0 (majoritaire) : Très bien prédite avec une précision de 76\% et un rappel de 97\%.
+\item Classe 1 (minoritaire) : Faible rappel (26\%), ce qui indique que de nombreuses instances de cette classe ne sont pas correctement identifiées.
+
+Ce problème de rappel faible pour la classe minoritaire peut être dû à un déséquilibre des classes ou au choix des hyperparamètres. (Voir Annexe~\ref{sec:annexe10}). 
+\end{itemize}
+\end{enumerate}
+
+\subsection{Comparaison et Validation croisé F1-score macro}
+\begin{flushleft}
+Pour améliorer la pondération des classes, nous allons utiliser l'argument class\_weight='balanced' dans les modèles comme Arbre de décision, RandomForestClassifier, LogisticRegression et SVM. 
+
+Les classes étant déséquilibrées, pour accorder donc la même importance à chaque classe, indépendament de sa taille, nous allons utiliser le F1-score macro. 
+
+Le F1-score macro est une bonne métrique pour évaluer un modèle, surtout lorsqu'on a des classes déséquilibrées, car il donne une importance égale à toutes les classes, indépendamment de leur fréquence.
+\end{flushleft}
+\begin{enumerate}
+\item Précision globale
+\begin{itemize}
+\item \textbf{Régression Logistique a la meilleure moyenne F1-score macro (0.6462)}, ce qui indique qu'elle a bien équilibré la précision et le rappel pour toutes les classes.
+\item Forêts Aléatoires suit avec un F1-score macro moyen de 0.6379, et Arbre de décision est un peu derrière à 0.6177.
+\item SVM et KNN sont en bas du classement, avec des moyennes de 0.4737 et 0.4912 respectivement, ce qui montre qu'ils ont de moins bons résultats sur les classes déséquilibrées.
+\end{itemize}
+
+\item \textbf{Meilleur modèle : Régression Logistique}
+
+Après avoir effectué la validation croisée, le modèle de Régression Logistique a été sélectionné comme le meilleur, car il a obtenu la meilleure moyenne F1-score macro.
+
+\item \textbf{Performance sur le jeu de test :}
+\begin{itemize}
+\item \textbf{Accuracy : 0.686}, ce qui signifie que le modèle prédit correctement 68.6\% des exemples du jeu de test.
+\item La précision pour la classe 0 est relativement bonne (0.83), mais pour la classe 1, elle est plus faible (0.48), ce qui indique que le modèle fait moins bien pour la classe minoritaire.
+\item Le rappel pour la classe 1 (0.65) est supérieur à sa précision, ce qui montre que le modèle détecte une partie significative des exemples de cette classe, mais encore une fois pas aussi bien que la classe 0.
+\item Le f1-score pour la classe 0 est de 0.76, tandis que pour la classe 1, il est de 0.55, ce qui reflète l'impact du déséquilibre des classes.
+\end{itemize}
+\end{enumerate}
+\begin{flushleft}
+\textbf{En conclusion:} 
+
+Le modèle de régression logistique semble être le meilleur choix basé sur \textbf{F1-score macro}, car il maintient un bon équilibre entre précision et rappel pour toutes les classes, en particulier la classe majoritaire.
+
+Toutefois, même si la précision de la classe 0 est bonne, la classe minoritaire (classe 1) a une précision relativement faible, ce qui peut suggérer un manque de puissance dans la prédiction des cas de cette classe.
+\end{flushleft}
+
+
+\begin{table}[h]
+\centering
+\caption{Résultats de performance sur les données test}
+\label{tab:performance_validation_Vali}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classe}       & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline
+0                     & 0.83               & 0.70            & 0.76              & 1059             \\ \hline
+1                     & 0.48               & 0.65            & 0.55              & 441              \\ \hline
+\textbf{Accuracy} & \multicolumn{2}{|c|}{} & 0.69            & 1500     \\ \hline
+\textbf{Macro Avg}    & 0.65               & 0.68            & 0.65              & 1500             \\ \hline
+\textbf{Weighted Avg} & 0.72               & 0.69            & 0.70              & 1500             \\ \hline
+\end{tabular}
+\begin{flushleft}
+Accuracy sur les données test: 0.686
+\end{flushleft}
+\end{table}
+
+\begin{flushleft}
+La matrice de confusion associées (voir Annexe~\ref{sec:annexe11}) indique que ce modèle semble être le meilleur choix basé sur F1-score macro. 
+\end{flushleft}
+\subsection{Recommendation}
+Suggestions pour améliorer la performance sur la classe minoritaire :
+\begin{enumerate}
+\item Rééchantillonnage des données :
+
+On peut utiliser l'oversampling (par exemple, SMOTE) pour augmenter le nombre d'exemples de la classe minoritaire, ou l'undersampling pour réduire la classe majoritaire.
+
+\item Ajustement des seuils de décision :
+
+Pour les modèles comme la régression logistique, on peux ajuster le seuil de décision pour favoriser la prédiction de la classe minoritaire.
+
+\item Utilisation de modèles plus complexes :
+
+Par exemple, des modèles comme XGBoost ou LightGBM, qui sont souvent plus efficaces dans la gestion des classes déséquilibrées.
+\end{enumerate}
+
+\section{ Prédire Credit Default avec le meilleur modele}
+\begin{flushleft}
+Nous avons sélectionner le meilleur modèle par validation croisé en utilisant le F1\-score Macro.
+Le meilleur modèle retenu est celui de la  logistique. Par la suite nous avons utiliser ce modèle entrainer sur le jeu de donné test pour prédire les nouvelles valeurs de la variable Credit Default. Voici une sortie des 05 première ligne de cette valeur:
+\end{flushleft}
+
+\begin{table}[h]
+\centering
+\caption{Données de crédit défaut prédite}
+\label{tab:credit_default}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Id} & \textbf{Credit Default} \\ \hline
+7500 & 0 \\ \hline
+7501 & 0 \\ \hline
+7502 & 1 \\ \hline
+7503 & 0 \\ \hline
+7504 & 1 \\ \hline
+\end{tabular}
+\end{table}
+

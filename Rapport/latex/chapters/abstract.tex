@@ -1,0 +1,16 @@
+% !TEX root = manuscript.tex
+\section*{Résumé}
+La capacité à anticiper les défauts de paiement permet aux institutions financières non seulement de réduire les risques, mais aussi d'améliorer la rentabilité en ajustant les taux d'intérêt, en optimisant la gestion des créances et en affinant leur stratégie de prêt. En outre, l'intégration des modèles de machine learning dans ces processus promet une automatisation accrue et une prise de décision rapide et efficace.
+
+Dans cette étude, nous avons exploré plusieurs modèles de machine learning pour résoudre un problème de classification, en utilisant la validation croisée pour évaluer leur performance de manière robuste. Les résultats ont révélé que certains modèles se distinguent clairement par leurs performances.
+
+Le modèle de forêts aléatoires a montré les meilleurs résultats en termes d'accuracy, atteignant une moyenne de 0.7793 en validation croisée, et une performance stable sur les différents plis. Cela a confirmé la capacité de ce modèle à gérer des données complexes, à généraliser correctement, et à éviter le surapprentissage. À l'opposé, des modèles comme le SVM ont montré une performance relativement faible, ce qui suggère que le choix des hyperparamètres ou la nature des données pourrait ne pas être adapté à ce type de modèle.
+
+En parallèle, l'analyse du F1-score macro, utilisé pour traiter le problème des classes déséquilibrées, a permis d'identifier le modèle de régression logistique comme le meilleur, avec un score moyen de 0.6462. Cette métrique a été cruciale pour équilibrer les performances sur les classes majoritaires et minoritaires, garantissant une évaluation plus juste des modèles dans un contexte de données déséquilibrées.
+
+La validation croisée a joué un rôle clé en réduisant les risques d'overfitting et en nous permettant de mieux comprendre la stabilité et la fiabilité des différents modèles. Cependant, il est important de noter que même le modèle de forêts aléatoires, bien qu'efficace sur l'ensemble d'entraînement, présente des limites sur le rappel de la classe minoritaire, ce qui pourrait être amélioré par l'ajustement des hyperparamètres ou l'utilisation d'approches spécifiques pour gérer le déséquilibre des classes.
+
+Enfin, bien que la régression logistique ait été sélectionnée comme le meilleur modèle pour le F1-score macro, l'amélioration continue des performances reste possible en ajustant les paramètres et en explorant d'autres techniques de prétraitement et de pondération des classes. Cette étude met en lumière l'importance de choisir les bons modèles et les bonnes métriques en fonction des caractéristiques spécifiques des données et des objectifs de la tâche.
+
+
+\newpage

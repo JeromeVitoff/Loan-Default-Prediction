@@ -1,0 +1,12 @@
+\babel@toc {french}{}\relax 
+\addvspace {10\p@ }
+\contentsline {xchapter}{Nettoyage, Exploration et Analyse descriptive des données}{2}{chapter.1}%
+\addvspace {10\p@ }
+\contentsline {xchapter}{Entrainement des modèles et interprétation des résultats }{6}{chapter.2}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Résultats de performance sur les données de validation-Arbre de décision\relax }}{8}{table.caption.9}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Résultats de performance sur les données de validation-Régression Logistique\relax }}{10}{table.caption.10}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Résultats de performance sur les données de validation Forêt aléatoire\relax }}{11}{table.caption.11}%
+\contentsline {table}{\numberline {2.4}{\ignorespaces Résultats de performance sur les données de validation - SVM\relax }}{12}{table.caption.12}%
+\contentsline {table}{\numberline {2.5}{\ignorespaces Résultats de performance pour KNN avec K=20 sur les données de validation\relax }}{13}{table.caption.13}%
+\contentsline {table}{\numberline {2.6}{\ignorespaces Résultats de performance sur les données test\relax }}{16}{table.caption.14}%
+\contentsline {table}{\numberline {2.7}{\ignorespaces Données de crédit défaut prédite\relax }}{17}{table.caption.15}%
