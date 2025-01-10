@@ -5,7 +5,7 @@
 \contentsline {starchapter}{Liste des tables}{vi}{chapter*.2}%
 \contentsline {starchapter}{Introduction}{1}{chapter*.3}%
 \contentsline {chapter}{\numberline {1}Nettoyage, Exploration et Analyse descriptive des données}{2}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Nettoyage et Analyse du jeu de données train}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.1}Nettoyage et Analyse du jeu de donnée train}{3}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Statistique descriptive des données train }{3}{subsection.1.1.1}%
 \contentsline {subsection}{\numberline {1.1.2}Matrice de corrélation}{3}{subsection.1.1.2}%
 \contentsline {section}{\numberline {1.2}Nettoyage et Analyse du Jeu de donnée test}{5}{section.1.2}%
