@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{azencott2020}
+Chloé-Agathe Azencott.
+\newblock {\em Introduction au Machine Learning}.
+\newblock Dunod, 2020.
+
+\bibitem{demangeot2022}
+Marine Demangeot.
+\newblock {\em Classification supervisée et non supervisée}.
+\newblock Ellipses, 2022.
+
+\bibitem{github_reference}
+VITOFFODJI~Adjimon Jerome.
+\newblock Loan default prediction, 2025.
+\newblock URL: \url{https://github.com/JeromeVitoff/Loan-Default-Prediction}.
+
+\bibitem{kaggle_reference}
+SERGEI SHIRKIN.
+\newblock Loan-default-prediction compétition, 2019.
+\newblock URL:
+  \url{https://www.kaggle.com/competitions/credit-default-prediction-ai-big-data/overview}.
+
+\end{thebibliography}

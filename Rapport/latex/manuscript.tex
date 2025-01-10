@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{babel}
 
+
 %additional packages
 \usepackage{amsmath}
 \usepackage{lipsum}
@@ -36,21 +37,22 @@
 \usepackage{epigraph}
 \usepackage{minitoc}
 \usepackage{blindtext}
-\usepackage{hyperref}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
 \usepackage{float}
 
 
 
 \title{\Huge{Loan Default Prediction}}
 \author{Adjimon VITOFFODJI}
-\date{Décembre 2024}
+\date{Janvier 2025}
 \def\mytitle{Loan Default Prediction}
 \def\myname{Adjimon VITOFFODJI}
 \def\degree{Master}
 \def\mydegree{Mathématiques et Informatiques Appliqués aux Sciences Humaines et Sociales}
 \def\mysupervisor{Sophie Lèbre}
 \def\myrollno{17EE010XX}
-\def\mydep{School of Electrical Sciences}
+\def\mydep{UPVM}
 
 
 
@@ -58,8 +60,9 @@
 
 %Front Matter
 \dominitoc
- \pagenumbering{roman}
- \input{front_page}
+\pagenumbering{roman}
+
+\input{front_page}
  \addstarredchapter{Remerciements}
  \input{chapters/acknowlegement}
  \addstarredchapter{Résumé}
@@ -67,6 +70,7 @@
 
 
 \tableofcontents
+\vspace{-1.5cm}
 \addstarredchapter{Liste des figures}
 \listoffigures
 \addstarredchapter{Liste des tables}
@@ -88,8 +92,9 @@
 \input{chapters/conclusion}
 % Ajouter l'annexe
 \addstarredchapter{Annexes}
-\input{chapters/Annexe.tex} 
+\input{chapters/Annexe} 
 \addstarredchapter{Bibliographie}
-\bibliographystyle{unsrt}
+\nocite{*}
+\bibliographystyle{plainurl}
 \bibliography{references}
 \end{document}
